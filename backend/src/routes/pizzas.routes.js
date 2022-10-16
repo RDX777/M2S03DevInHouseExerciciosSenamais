@@ -1,6 +1,6 @@
 import { Router } from "express"
 
-import { findPizza, destroyPizza, createPizza, updatePizza } from "../api/controllers/pizzas.controller.js"
+import { findPizza, destroyPizza, createPizza, updatePizza } from "../api/controllers/pizzas.controller"
 
 const pizzaRoutes = Router()
 

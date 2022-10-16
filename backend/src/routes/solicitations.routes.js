@@ -5,7 +5,7 @@ import {findSolicitation,
   updateSolicitation,
   updateOrderSolicitationHaCaminho,
   updateOrderSolicitationFinalizado,
-  createSolicitation } from "../api/controllers/solicitations.controller.js"
+  createSolicitation } from "../api/controllers/solicitations.controller"
 
 const solicitationsRoutes = Router()
 
