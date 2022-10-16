@@ -1,6 +1,8 @@
 import { v4 as uuidv4 } from "uuid"
 import { createPizzaSchema } from "../validations/createPizzaSchema.js"
 
+import { create, find, destroy, update } from "../models/pizza.model.js"
+
 let DADOSPIZZAS = [{
   "id": "5a4bc4c6-fcc4-497b-b1f8-3f68e3af6441",
   "name": "Pizza numero 1",
@@ -15,18 +17,21 @@ let DADOSPIZZAS = [{
 
 export function findPizza(request, response) {
   const nameqQuery = request.query.name || ""
-  const pizzasFiltered = DADOSPIZZAS.filter(pizza => pizza.name.toLowerCase().includes(nameqQuery.toLowerCase()))
+  const pizzasFiltered = find(nameqQuery)
   return response.status(200).json(pizzasFiltered)
 }
 
 export function destroyPizza(request, response) {
   const { id } = request.params
-
-  const item = DADOSPIZZAS.filter(pizza => {
-    return pizza.id !== id
-  })
-  DADOSPIZZAS = item
+  destroy(id)
   return response.status(200).json({ message: "Deletado com sucesso" })
+}
+
+export function updatePizza(request, response) {
+
+  const { id } = request.params
+  update(id, request.body)
+  return response.status(200).json({ message: "Atualizado com sucesso" })
 }
 
 export async function createPizza(request, response) {
@@ -42,7 +47,9 @@ export async function createPizza(request, response) {
       price,
       ingredients,
     }
-    DADOSPIZZAS.push(pizza)
+
+    create(pizza)
+
     return response.status(201).json(pizza)
   } catch (error) {
     return response.status(400).json({ error: error.message })
