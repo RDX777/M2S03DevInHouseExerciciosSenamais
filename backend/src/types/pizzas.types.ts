@@ -10,5 +10,5 @@ export interface BodyParamsCreatePizza {
   name: string,
   description: string,
   price: number,
-  ingredients: object
+  ingredients: Array<string>
 }
